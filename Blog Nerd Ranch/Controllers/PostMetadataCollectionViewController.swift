@@ -8,7 +8,7 @@
 
 import UIKit
 
-private let reuseIdentifier = "PostMetadataCollectionViewCell"
+private let reuseIdentifier = String(describing: PostMetadataCollectionViewCell.self)
 
 enum MetadataError : Error {
     case missingData
@@ -25,7 +25,7 @@ class PostMetadataCollectionViewController: UICollectionViewController, UICollec
 
         // Register cell nib
         
-        self.collectionView.register(UINib(nibName: reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView.register(UINib(nibName: String(describing: PostMetadataCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
 
         // Do any additional setup after loading the view.
         title = "Blog Posts"
