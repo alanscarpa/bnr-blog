@@ -1,0 +1,11 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/post/5"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "post/5.json",
+    "fixedDelayMilliseconds": 100
+  }
+}

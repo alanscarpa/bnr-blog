@@ -1,0 +1,10 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/post-metadata/4"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "post-metadata/4.json"
+  }
+}
