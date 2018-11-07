@@ -23,8 +23,9 @@ class PostMetadataCollectionViewController: UICollectionViewController, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Register cell classes
-        self.collectionView!.register(PostMetadataCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        // Register cell nib
+        
+        self.collectionView.register(UINib(nibName: reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
 
         // Do any additional setup after loading the view.
         title = "Blog Posts"
@@ -110,15 +111,14 @@ class PostMetadataCollectionViewController: UICollectionViewController, UICollec
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PostMetadataCollectionViewCell
         
         let postMetadata = dataSource.postMetadata(at: indexPath)
-        
-        // Configure the cell
-        cell.titleLabel.text = postMetadata.title
+        cell.configure(forPostMetaData: postMetadata)
     
         return cell
     }
 
     // MARK: UICollectionViewDelegate
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // TODO:  Lots of duplicate code in below methods.  Extract into own network method.
         let postMetadata = dataSource.postMetadata(at: indexPath)
 
         let url = server.allPostsUrl
