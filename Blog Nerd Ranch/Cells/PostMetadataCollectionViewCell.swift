@@ -10,11 +10,13 @@ import UIKit
 
 class PostMetadataCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var authorImageView: UIImageView!
-    @IBOutlet weak var authorLabel: UILabel!
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var summaryLabel: UILabel!
+    @IBOutlet weak var titleLabel : UILabel!
+    @IBOutlet weak var authorImageView : UIImageView!
+    @IBOutlet weak var authorLabel : UILabel!
+    @IBOutlet weak var dateLabel : UILabel!
+    @IBOutlet weak var summaryLabel : UILabel!
+    
+    private var imageDataTask : URLSessionDataTask?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,6 +25,7 @@ class PostMetadataCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         authorImageView.image = nil
+        imageDataTask?.cancel()
     }
     
     private func setUpAccessibility() {
@@ -52,5 +55,16 @@ class PostMetadataCollectionViewCell: UICollectionViewCell {
         authorLabel.text = postMetaData.author.name
         dateLabel.text = DateHandler.shared.shortStyle(fromDate: postMetaData.publishDate)
         summaryLabel.text = postMetaData.summary
+        
+        // todo cache image
+        if let url = URL(string: postMetaData.author.image) {
+            let imageRequest = ImageRequest(url: url)
+            imageDataTask = imageRequest.load { [weak self] image, error in
+                // todo handle error
+                if let image = image {
+                    self?.authorImageView.image = image
+                }
+            }
+        }
     }
 }

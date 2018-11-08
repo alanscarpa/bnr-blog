@@ -181,30 +181,17 @@ class PostMetadataCollectionViewController: UICollectionViewController, UICollec
     
     // MARK: - Data methods
     func fetchPostMetadata() {
-        let url = server.allPostMetadataUrl
-        
+        let allPostMetaDataRequest = AllPostMetaDataRequest(url: server.allPostMetadataUrl)
         if downloadTask?.progress.isCancellable ?? false {
             downloadTask?.cancel()
         }
-        let task = URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
+        downloadTask = allPostMetaDataRequest.load { [weak self] (metadataList, error) in
             guard error == nil else {
                 self?.displayError(error: error!)
                 return
             }
-            guard let data = data else {
-                self?.displayError(error: MetadataError.missingData)
-                return
-            }
-            let metadataList : [PostMetadata]?
-            let decoder = JSONDecoder();
-            decoder.dateDecodingStrategy = .iso8601
-            do {
-                metadataList = try decoder.decode(Array.self, from: data)
-            } catch {
-                self?.displayError(error: error)
-                return
-            }
             
+            // todo meta could be nil
             if let list = metadataList {
                 self?.dataSource.postMetadataList = list
             }
@@ -213,9 +200,6 @@ class PostMetadataCollectionViewController: UICollectionViewController, UICollec
                 self?.collectionView?.reloadData()
             }
         }
-        task.resume()
-        downloadTask = task
-        
     }
     
     func displayError(error: Error) {
