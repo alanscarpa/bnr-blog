@@ -1,5 +1,5 @@
 //
-//  APIRequest.swift
+//  BlogPostRequest.swift
 //  Blog Nerd Ranch
 //
 //  Created by Alan Scarpa on 11/7/18.
@@ -8,22 +8,22 @@
 
 import Foundation
 
-struct AllPostMetaDataRequest: NetworkRequest {
-    func load(_ url: URL, completion: @escaping (NetworkResult<[PostMetadata]>) -> Void) -> URLSessionDataTask {
+struct BlogPostRequest: NetworkRequest {
+    func load(_ url: URL, completion: @escaping (NetworkResult<Post>) -> Void) -> URLSessionDataTask {
         let task = dataTask(with: url) { result in
             switch result {
             case .success(let data):
-                let metadataList : [PostMetadata]?
+                let post : Post?
                 let decoder = JSONDecoder();
                 decoder.dateDecodingStrategy = .iso8601
                 do {
-                    metadataList = try decoder.decode(Array.self, from: data)
+                    post = try decoder.decode(Post.self, from: data)
                 } catch {
                     completion(.failure(error))
                     return
                 }
-                if let list = metadataList {
-                    completion(.success(list))
+                if let post = post {
+                    completion(.success(post))
                 } else {
                     completion(.failure(BNRError.nilObject))
                 }

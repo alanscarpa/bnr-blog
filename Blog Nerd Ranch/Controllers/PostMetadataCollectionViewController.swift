@@ -113,45 +113,25 @@ class PostMetadataCollectionViewController: UICollectionViewController, UICollec
 
     // MARK: UICollectionViewDelegate
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let postMetadata = dataSource.postMetadata(at: indexPath)
-
-        let url = server.postUrlFor(id: postMetadata.postId)
-
-        // Get all posts, filter to the selected post, and then show it
-        // todo: Is there a better way to do this?
         if downloadTask?.progress.isCancellable ?? false {
             downloadTask?.cancel()
         }
-        let task = URLSession.shared.dataTask(with: url) { [weak self] (data, _, error) in
-            guard error == nil else {
-                self?.displayError(error!)
-                return
-            }
-            guard let data = data else {
-                self?.displayError(BNRError.missingData)
-                return
-            }
-            
-            let post : Post?
-            let decoder = JSONDecoder();
-            decoder.dateDecodingStrategy = .iso8601
-            do {
-                post = try decoder.decode(Post.self, from: data)
-            } catch {
+        let postMetadata = dataSource.postMetadata(at: indexPath)
+        let url = server.postUrlFor(id: postMetadata.postId)
+        // todo: show spinner
+        downloadTask = BlogPostRequest().load(url) { [weak self] result in
+            switch result {
+            case .success(let post):
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let postController = storyboard.instantiateViewController(withIdentifier: "PostViewController") as! PostViewController
+                postController.post = post
+                DispatchQueue.main.async {
+                    self?.navigationController?.pushViewController(postController, animated: true)
+                }
+            case .failure(let error):
                 self?.displayError(error)
-                return
-            }
-            
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let postController = storyboard.instantiateViewController(withIdentifier: "PostViewController") as! PostViewController
-            postController.post = post
-            
-            DispatchQueue.main.async {
-                self?.navigationController?.pushViewController(postController, animated: true)
             }
         }
-        task.resume()
-        downloadTask = task
     }
 
     // Uncomment this method to specify if the specified item should be selected
@@ -177,9 +157,7 @@ class PostMetadataCollectionViewController: UICollectionViewController, UICollec
         downloadTask = AllPostMetaDataRequest().load(server.allPostMetadataUrl) { [weak self] result in
             switch result {
             case .success(let metadataList):
-                if let list = metadataList {
-                    self?.dataSource.postMetadataList = list
-                }
+                self?.dataSource.postMetadataList = metadataList
             case .failure(let error):
                 self?.displayError(error)
             }

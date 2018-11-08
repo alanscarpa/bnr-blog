@@ -11,4 +11,5 @@ import Foundation
 enum BNRError : Error {
     case missingData
     case unableToDecodeData
+    case nilObject
 }

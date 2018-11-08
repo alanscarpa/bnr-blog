@@ -27,7 +27,7 @@ We're midway through development on this app. And while we've got a good amount
 of it written, there are a few things we know we need to fix before we can ship
 it:
 
-- [ ] Our collection view just shows the blog title for each post. It should
+- [x ] Our collection view just shows the blog title for each post. It should
 show title, author, summary, and publish date. We recommend you build this view
 in a xib or storyboard.
 - [ ] Grouping & sorting are both broken. The menus come up, but the order of
