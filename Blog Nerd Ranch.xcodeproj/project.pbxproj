@@ -11,9 +11,11 @@
 		45862B282193A39400DA7E31 /* PostMetadataCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45862B262193A39400DA7E31 /* PostMetadataCollectionViewCell.swift */; };
 		45862B292193A39400DA7E31 /* PostMetadataCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45862B272193A39400DA7E31 /* PostMetadataCollectionViewCell.xib */; };
 		45862B2C2193B1DD00DA7E31 /* DateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45862B2B2193B1DD00DA7E31 /* DateHandler.swift */; };
-		45862B2F2193BD5000DA7E31 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45862B2E2193BD5000DA7E31 /* APIRequest.swift */; };
+		45862B2F2193BD5000DA7E31 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45862B2E2193BD5000DA7E31 /* NetworkRequest.swift */; };
 		45862B312194057500DA7E31 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45862B302194057500DA7E31 /* NetworkResult.swift */; };
 		45862B332194142200DA7E31 /* BNRError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45862B322194142200DA7E31 /* BNRError.swift */; };
+		45862B352194166F00DA7E31 /* AllPostMetaDataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45862B342194166F00DA7E31 /* AllPostMetaDataRequest.swift */; };
+		45862B372194167600DA7E31 /* ImageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45862B362194167600DA7E31 /* ImageRequest.swift */; };
 		8367F7D3215C2E5000C250AC /* PostMetadataDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8367F7D2215C2E5000C250AC /* PostMetadataDataSource.swift */; };
 		8367F7D4215C2E5F00C250AC /* PostMetadataDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8367F7D2215C2E5000C250AC /* PostMetadataDataSource.swift */; };
 		836E38D32139A918005B928C /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836E38D22139A918005B928C /* Server.swift */; };
@@ -56,9 +58,11 @@
 		45862B262193A39400DA7E31 /* PostMetadataCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostMetadataCollectionViewCell.swift; sourceTree = "<group>"; };
 		45862B272193A39400DA7E31 /* PostMetadataCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostMetadataCollectionViewCell.xib; sourceTree = "<group>"; };
 		45862B2B2193B1DD00DA7E31 /* DateHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHandler.swift; sourceTree = "<group>"; };
-		45862B2E2193BD5000DA7E31 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
+		45862B2E2193BD5000DA7E31 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		45862B302194057500DA7E31 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
 		45862B322194142200DA7E31 /* BNRError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNRError.swift; sourceTree = "<group>"; };
+		45862B342194166F00DA7E31 /* AllPostMetaDataRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPostMetaDataRequest.swift; sourceTree = "<group>"; };
+		45862B362194167600DA7E31 /* ImageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRequest.swift; sourceTree = "<group>"; };
 		8367F7D2215C2E5000C250AC /* PostMetadataDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostMetadataDataSource.swift; sourceTree = "<group>"; };
 		836E38D22139A918005B928C /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		83B00AC621359CFF000C70F9 /* Blog Nerd Ranch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Blog Nerd Ranch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,7 +122,9 @@
 		45862B2D2193B80000DA7E31 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				45862B2E2193BD5000DA7E31 /* APIRequest.swift */,
+				45862B2E2193BD5000DA7E31 /* NetworkRequest.swift */,
+				45862B342194166F00DA7E31 /* AllPostMetaDataRequest.swift */,
+				45862B362194167600DA7E31 /* ImageRequest.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -353,10 +359,12 @@
 				45862B2C2193B1DD00DA7E31 /* DateHandler.swift in Sources */,
 				45862B312194057500DA7E31 /* NetworkResult.swift in Sources */,
 				83C918E9213DDBD100FD6F83 /* DisplayOrdering.swift in Sources */,
+				45862B372194167600DA7E31 /* ImageRequest.swift in Sources */,
 				8367F7D3215C2E5000C250AC /* PostMetadataDataSource.swift in Sources */,
 				83B00AFC21359FE1000C70F9 /* PostMetadataCollectionViewController.swift in Sources */,
 				83B00B03213621EE000C70F9 /* Post.swift in Sources */,
-				45862B2F2193BD5000DA7E31 /* APIRequest.swift in Sources */,
+				45862B2F2193BD5000DA7E31 /* NetworkRequest.swift in Sources */,
+				45862B352194166F00DA7E31 /* AllPostMetaDataRequest.swift in Sources */,
 				45862B282193A39400DA7E31 /* PostMetadataCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

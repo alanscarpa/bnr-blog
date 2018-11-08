@@ -113,10 +113,9 @@ class PostMetadataCollectionViewController: UICollectionViewController, UICollec
 
     // MARK: UICollectionViewDelegate
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // TODO:  Lots of duplicate code in below methods.  Extract into own network method.
         let postMetadata = dataSource.postMetadata(at: indexPath)
 
-        let url = server.allPostsUrl
+        let url = server.postUrlFor(id: postMetadata.postId)
 
         // Get all posts, filter to the selected post, and then show it
         // todo: Is there a better way to do this?
@@ -129,27 +128,23 @@ class PostMetadataCollectionViewController: UICollectionViewController, UICollec
                 return
             }
             guard let data = data else {
-                self?.displayError(MetadataError.missingData)
+                self?.displayError(BNRError.missingData)
                 return
             }
             
-            let posts : [Post]?
+            let post : Post?
             let decoder = JSONDecoder();
             decoder.dateDecodingStrategy = .iso8601
             do {
-                posts = try decoder.decode(Array<Post>.self, from: data)
+                post = try decoder.decode(Post.self, from: data)
             } catch {
                 self?.displayError(error)
                 return
             }
             
-            let selectedPost = posts?.first(where: { (post) -> Bool in
-                return post.id == postMetadata.postId
-            })
-            
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let postController = storyboard.instantiateViewController(withIdentifier: "PostViewController") as! PostViewController
-            postController.post = selectedPost
+            postController.post = post
             
             DispatchQueue.main.async {
                 self?.navigationController?.pushViewController(postController, animated: true)
