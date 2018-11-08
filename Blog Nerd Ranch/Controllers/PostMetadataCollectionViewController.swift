@@ -14,7 +14,7 @@ private let headerReuseIdentifier = String(describing: HeaderCollectionReusableV
 class PostMetadataCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     var server = Servers.mock
     var downloadTask : URLSessionTask?
-    var dataSource = PostMetadataDataSource(ordering: DisplayOrdering(grouping:.none, sorting: .byPublishDate(recentFirst: false)))
+    var dataSource = PostMetadataDataSource(ordering: DisplayOrdering(grouping:.none, sorting: .byPublishDate(recentFirst: true)))
     
     override func viewDidLoad() {
         super.viewDidLoad()
