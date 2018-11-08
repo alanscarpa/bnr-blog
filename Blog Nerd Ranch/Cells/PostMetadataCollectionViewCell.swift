@@ -11,15 +11,46 @@ import UIKit
 class PostMetadataCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var authorImageView: UIImageView!
+    @IBOutlet weak var authorLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var summaryLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        setUpAccessibility()
+    }
+    
+    override func prepareForReuse() {
+        authorImageView.image = nil
+    }
+    
+    private func setUpAccessibility() {
         titleLabel.isAccessibilityElement = true
-        titleLabel.accessibilityTraits = UIAccessibilityTraits.staticText
+        titleLabel.accessibilityTraits = .staticText
         titleLabel.accessibilityLabel = "Post Title"
+        
+        authorImageView.isAccessibilityElement = true
+        authorImageView.accessibilityTraits = .image
+        authorImageView.accessibilityLabel = "Author Image"
+        
+        authorLabel.isAccessibilityElement = true
+        authorLabel.accessibilityTraits = .staticText
+        authorLabel.accessibilityLabel = "Author Name"
+        
+        dateLabel.isAccessibilityElement = true
+        dateLabel.accessibilityTraits = .staticText
+        dateLabel.accessibilityLabel = "Date"
+        
+        summaryLabel.isAccessibilityElement = true
+        summaryLabel.accessibilityTraits = .staticText
+        summaryLabel.accessibilityLabel = "Summary"
     }
     
     func configure(forPostMetaData postMetaData: PostMetadata) {
         titleLabel.text = postMetaData.title
+        authorLabel.text = postMetaData.author.name
+        dateLabel.text = DateHandler.shared.shortStyle(fromDate: postMetaData.publishDate)
+        summaryLabel.text = postMetaData.summary
     }
 }

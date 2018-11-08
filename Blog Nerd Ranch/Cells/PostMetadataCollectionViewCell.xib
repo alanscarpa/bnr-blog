@@ -25,7 +25,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1WV-bt-PeE">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1WV-bt-PeE" userLabel="Author Image View">
                         <rect key="frame" x="20" y="12" width="65" height="65"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="1WV-bt-PeE" secondAttribute="height" multiplier="1:1" id="TjH-Mf-5gq"/>
@@ -73,6 +73,10 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="481" height="136"/>
             <connections>
+                <outlet property="authorImageView" destination="1WV-bt-PeE" id="y68-Wg-4xG"/>
+                <outlet property="authorLabel" destination="uxH-Bb-Q9G" id="57H-YP-HNO"/>
+                <outlet property="dateLabel" destination="g4p-sr-xOt" id="ldP-nK-2MR"/>
+                <outlet property="summaryLabel" destination="7Hi-Kn-ftD" id="P6w-Y8-sjf"/>
                 <outlet property="titleLabel" destination="sY2-KF-qbx" id="U7K-vL-eu5"/>
             </connections>
             <point key="canvasLocation" x="482.39999999999998" y="191.6041979010495"/>

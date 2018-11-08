@@ -124,7 +124,7 @@ class PostMetadataCollectionViewController: UICollectionViewController, UICollec
         let url = server.allPostsUrl
 
         // Get all posts, filter to the selected post, and then show it
-        // Is there a better way to do this?
+        // todo: Is there a better way to do this?
         if downloadTask?.progress.isCancellable ?? false {
             downloadTask?.cancel()
         }
@@ -176,6 +176,8 @@ class PostMetadataCollectionViewController: UICollectionViewController, UICollec
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.size.width, height: 160)
     }
+    
+    
     
     // MARK: - Data methods
     func fetchPostMetadata() {

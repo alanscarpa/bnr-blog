@@ -10,6 +10,8 @@
 		45862B1F2193A00B00DA7E31 /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45862B1E2193A00B00DA7E31 /* Author.swift */; };
 		45862B282193A39400DA7E31 /* PostMetadataCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45862B262193A39400DA7E31 /* PostMetadataCollectionViewCell.swift */; };
 		45862B292193A39400DA7E31 /* PostMetadataCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45862B272193A39400DA7E31 /* PostMetadataCollectionViewCell.xib */; };
+		45862B2C2193B1DD00DA7E31 /* DateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45862B2B2193B1DD00DA7E31 /* DateHandler.swift */; };
+		45862B2F2193BD5000DA7E31 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45862B2E2193BD5000DA7E31 /* APIRequest.swift */; };
 		8367F7D3215C2E5000C250AC /* PostMetadataDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8367F7D2215C2E5000C250AC /* PostMetadataDataSource.swift */; };
 		8367F7D4215C2E5F00C250AC /* PostMetadataDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8367F7D2215C2E5000C250AC /* PostMetadataDataSource.swift */; };
 		836E38D32139A918005B928C /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836E38D22139A918005B928C /* Server.swift */; };
@@ -51,6 +53,8 @@
 		45862B1E2193A00B00DA7E31 /* Author.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
 		45862B262193A39400DA7E31 /* PostMetadataCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostMetadataCollectionViewCell.swift; sourceTree = "<group>"; };
 		45862B272193A39400DA7E31 /* PostMetadataCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostMetadataCollectionViewCell.xib; sourceTree = "<group>"; };
+		45862B2B2193B1DD00DA7E31 /* DateHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHandler.swift; sourceTree = "<group>"; };
+		45862B2E2193BD5000DA7E31 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		8367F7D2215C2E5000C250AC /* PostMetadataDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostMetadataDataSource.swift; sourceTree = "<group>"; };
 		836E38D22139A918005B928C /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		83B00AC621359CFF000C70F9 /* Blog Nerd Ranch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Blog Nerd Ranch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,6 +101,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		45862B2A2193B17900DA7E31 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				45862B2B2193B1DD00DA7E31 /* DateHandler.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		45862B2D2193B80000DA7E31 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				45862B2E2193BD5000DA7E31 /* APIRequest.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		83B00ABD21359CFF000C70F9 = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +140,8 @@
 		83B00AC821359CFF000C70F9 /* Blog Nerd Ranch */ = {
 			isa = PBXGroup;
 			children = (
+				45862B2D2193B80000DA7E31 /* Network */,
+				45862B2A2193B17900DA7E31 /* Utilities */,
 				83B00B0E21389CD6000C70F9 /* Cells */,
 				83B00B0D21389CB9000C70F9 /* Controllers */,
 				83B00B01213621B1000C70F9 /* Models */,
@@ -321,10 +343,12 @@
 				83B00ACA21359CFF000C70F9 /* AppDelegate.swift in Sources */,
 				83B00B0521362224000C70F9 /* PostMetadata.swift in Sources */,
 				45862B1F2193A00B00DA7E31 /* Author.swift in Sources */,
+				45862B2C2193B1DD00DA7E31 /* DateHandler.swift in Sources */,
 				83C918E9213DDBD100FD6F83 /* DisplayOrdering.swift in Sources */,
 				8367F7D3215C2E5000C250AC /* PostMetadataDataSource.swift in Sources */,
 				83B00AFC21359FE1000C70F9 /* PostMetadataCollectionViewController.swift in Sources */,
 				83B00B03213621EE000C70F9 /* Post.swift in Sources */,
+				45862B2F2193BD5000DA7E31 /* APIRequest.swift in Sources */,
 				45862B282193A39400DA7E31 /* PostMetadataCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
