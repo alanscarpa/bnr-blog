@@ -57,14 +57,14 @@ class PostMetadataCollectionViewCell: UICollectionViewCell {
         summaryLabel.text = postMetaData.summary
         
         // todo cache image
-        if let url = URL(string: postMetaData.author.image) {
-            imageDataTask = ImageRequest().load(url) { [weak self] result in
-                switch result {
-                case .success(let image):
+        imageDataTask = ImageRequest().load(Servers.mock.imageUrlFor(path: postMetaData.author.image)) { [weak self] result in
+            switch result {
+            case .success(let image):
+                DispatchQueue.main.async {
                     self?.authorImageView.image = image
-                case .failure(let error):
-                    print(error.localizedDescription)
                 }
+            case .failure(let error):
+                print(error.localizedDescription)
             }
         }
     }

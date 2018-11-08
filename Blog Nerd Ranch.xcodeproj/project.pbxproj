@@ -113,7 +113,6 @@
 			isa = PBXGroup;
 			children = (
 				45862B2B2193B1DD00DA7E31 /* DateHandler.swift */,
-				45862B302194057500DA7E31 /* NetworkResult.swift */,
 				45862B322194142200DA7E31 /* BNRError.swift */,
 			);
 			path = Utilities;
@@ -125,6 +124,7 @@
 				45862B2E2193BD5000DA7E31 /* NetworkRequest.swift */,
 				45862B342194166F00DA7E31 /* AllPostMetaDataRequest.swift */,
 				45862B362194167600DA7E31 /* ImageRequest.swift */,
+				45862B302194057500DA7E31 /* NetworkResult.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";

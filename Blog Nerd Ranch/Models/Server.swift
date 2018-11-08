@@ -39,6 +39,14 @@ struct Server {
     func postUrlFor(id: String) -> URL {
         return host.appendingPathComponent("/post/\(id)")
     }
+    
+    /// Get the URL to query for image data for a specific image path
+    ///
+    /// - Parameter path: Path where image is located.
+    /// - Returns: URL to query to get image data for that path.
+    func imageUrlFor(path: String) -> URL {
+        return host.appendingPathComponent("\(path)")
+    }
 }
 
 /// A collection of servers to test against. Right now, we only support a mock server.
