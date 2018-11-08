@@ -10,6 +10,12 @@ import Foundation
 
 struct Author: Codable {
     let name : String
-    let image : String
+    let imagePath : String
     let title : String
+    
+    enum CodingKeys: String, CodingKey {
+        case name
+        case imagePath = "image"
+        case title
+    }
 }

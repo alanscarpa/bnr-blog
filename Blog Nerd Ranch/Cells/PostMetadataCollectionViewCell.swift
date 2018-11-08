@@ -17,7 +17,8 @@ class PostMetadataCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var summaryLabel : UILabel!
     
     private var imageDataTask : URLSessionDataTask?
-    
+    var server = Servers.mock
+
     override func awakeFromNib() {
         super.awakeFromNib()
         setUpAccessibility()
@@ -57,7 +58,7 @@ class PostMetadataCollectionViewCell: UICollectionViewCell {
         summaryLabel.text = postMetaData.summary
         
         // todo cache image
-        imageDataTask = ImageRequest().load(Servers.mock.imageUrlFor(path: postMetaData.author.image)) { [weak self] result in
+        imageDataTask = ImageRequest().load(server.imageUrlFor(path: postMetaData.author.imagePath)) { [weak self] result in
             switch result {
             case .success(let image):
                 DispatchQueue.main.async {
