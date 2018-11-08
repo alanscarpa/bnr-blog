@@ -10,11 +10,6 @@ import UIKit
 
 private let reuseIdentifier = String(describing: PostMetadataCollectionViewCell.self)
 
-enum MetadataError : Error {
-    case missingData
-    case unableToDecodeData
-}
-
 class PostMetadataCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     var server = Servers.mock
     var downloadTask : URLSessionTask?
@@ -130,11 +125,11 @@ class PostMetadataCollectionViewController: UICollectionViewController, UICollec
         }
         let task = URLSession.shared.dataTask(with: url) { [weak self] (data, _, error) in
             guard error == nil else {
-                self?.displayError(error: error!)
+                self?.displayError(error!)
                 return
             }
             guard let data = data else {
-                self?.displayError(error: MetadataError.missingData)
+                self?.displayError(MetadataError.missingData)
                 return
             }
             
@@ -144,7 +139,7 @@ class PostMetadataCollectionViewController: UICollectionViewController, UICollec
             do {
                 posts = try decoder.decode(Array<Post>.self, from: data)
             } catch {
-                self?.displayError(error: error)
+                self?.displayError(error)
                 return
             }
             
@@ -181,28 +176,25 @@ class PostMetadataCollectionViewController: UICollectionViewController, UICollec
     
     // MARK: - Data methods
     func fetchPostMetadata() {
-        let allPostMetaDataRequest = AllPostMetaDataRequest(url: server.allPostMetadataUrl)
         if downloadTask?.progress.isCancellable ?? false {
             downloadTask?.cancel()
         }
-        downloadTask = allPostMetaDataRequest.load { [weak self] (metadataList, error) in
-            guard error == nil else {
-                self?.displayError(error: error!)
-                return
+        downloadTask = AllPostMetaDataRequest().load(server.allPostMetadataUrl) { [weak self] result in
+            switch result {
+            case .success(let metadataList):
+                if let list = metadataList {
+                    self?.dataSource.postMetadataList = list
+                }
+            case .failure(let error):
+                self?.displayError(error)
             }
-            
-            // todo meta could be nil
-            if let list = metadataList {
-                self?.dataSource.postMetadataList = list
-            }
-            
             DispatchQueue.main.async {
                 self?.collectionView?.reloadData()
             }
         }
     }
     
-    func displayError(error: Error) {
+    func displayError(_ error: Error) {
         print("Error: \(error.localizedDescription)")
     }
 }

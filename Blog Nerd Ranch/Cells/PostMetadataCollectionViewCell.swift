@@ -58,11 +58,12 @@ class PostMetadataCollectionViewCell: UICollectionViewCell {
         
         // todo cache image
         if let url = URL(string: postMetaData.author.image) {
-            let imageRequest = ImageRequest(url: url)
-            imageDataTask = imageRequest.load { [weak self] image, error in
-                // todo handle error
-                if let image = image {
+            imageDataTask = ImageRequest().load(url) { [weak self] result in
+                switch result {
+                case .success(let image):
                     self?.authorImageView.image = image
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
             }
         }

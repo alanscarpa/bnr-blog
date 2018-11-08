@@ -10,70 +10,66 @@ import Foundation
 // todo move this
 import UIKit
 
-struct AllPostMetaDataRequest: NetworkRequest {
-    var url : URL
-    
-    init(url: URL) {
-        self.url = url
-    }
-    
-    func load(completion: @escaping ([PostMetadata]?, Error?) -> Void) -> URLSessionDataTask {
+protocol NetworkRequest {
+    associatedtype Object
+    func load(_ url: URL, completion: @escaping (NetworkResult<Object>) -> Void) -> URLSessionDataTask
+}
+
+extension NetworkRequest {
+    fileprivate func dataTask(with url: URL, completion: @escaping (NetworkResult<Data>) -> Void) -> URLSessionDataTask {
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard error == nil else {
-                completion(nil, error)
+                completion(.failure(error!))
                 return
             }
             guard let data = data else {
-                completion(nil, MetadataError.missingData)
+                completion(.failure(BNRError.missingData))
                 return
             }
-            
-            let metadataList : [PostMetadata]?
-            let decoder = JSONDecoder();
-            decoder.dateDecodingStrategy = .iso8601
-            do {
-                metadataList = try decoder.decode(Array.self, from: data)
-            } catch {
-                completion(nil, error)
-                return
-            }
-            
-            if let list = metadataList {
-                completion(list, error)
-            }
-            
+            completion(.success(data))
         }
         task.resume()
         return task
     }
 }
 
-protocol NetworkRequest {
-    associatedtype Object
-    var url : URL { get set }
-    func load(completion: @escaping (Object?, Error?) -> Void) -> URLSessionDataTask
+struct AllPostMetaDataRequest: NetworkRequest {
+    func load(_ url: URL, completion: @escaping (NetworkResult<[PostMetadata]?>) -> Void) -> URLSessionDataTask {
+        let task = dataTask(with: url) { result in
+            switch result {
+            case .success(let data):
+                let metadataList : [PostMetadata]?
+                let decoder = JSONDecoder();
+                decoder.dateDecodingStrategy = .iso8601
+                do {
+                    metadataList = try decoder.decode(Array.self, from: data)
+                } catch {
+                    completion(.failure(error))
+                    return
+                }
+                completion(.success(metadataList))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+        return task
+    }
 }
 
 struct ImageRequest: NetworkRequest {
-    var url : URL
-    
-    init(url: URL) {
-        self.url = url
-    }
-    
-    func load(completion: @escaping (UIImage?, Error?) -> Void) -> URLSessionDataTask {
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            guard error == nil else {
-                completion(nil, error)
-                return
+    func load(_ url: URL, completion: @escaping (NetworkResult<UIImage>) -> Void) -> URLSessionDataTask {
+        let task = dataTask(with: url) { result in
+            switch result {
+            case .success(let data):
+                guard let image = UIImage(data: data) else {
+                    completion(.failure(BNRError.unableToDecodeData))
+                    return
+                }
+                completion(.success(image))
+            case .failure(let error):
+                completion(.failure(error))
             }
-            guard let data = data else {
-                completion(nil, MetadataError.missingData)
-                return
-            }
-            completion(UIImage(data: data), nil)
         }
-        task.resume()
         return task
     }
 }

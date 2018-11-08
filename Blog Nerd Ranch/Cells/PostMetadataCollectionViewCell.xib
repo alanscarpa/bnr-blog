@@ -19,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="481" height="160"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sY2-KF-qbx">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sY2-KF-qbx">
                         <rect key="frame" x="105" y="35" width="356" height="19.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <nil key="textColor"/>
@@ -52,7 +52,7 @@
                     </label>
                 </subviews>
             </view>
-            <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="uxH-Bb-Q9G" firstAttribute="width" secondItem="sY2-KF-qbx" secondAttribute="width" multiplier="0.6" id="54U-BM-MlB"/>
                 <constraint firstItem="g4p-sr-xOt" firstAttribute="trailing" secondItem="sY2-KF-qbx" secondAttribute="trailing" id="653-rc-VTv"/>
