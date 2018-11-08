@@ -8,7 +8,8 @@
 
 import UIKit
 
-private let reuseIdentifier = String(describing: PostMetadataCollectionViewCell.self)
+private let cellReuseIdentifier = String(describing: PostMetadataCollectionViewCell.self)
+private let headerReuseIdentifier = String(describing: HeaderCollectionReusableView.self)
 
 class PostMetadataCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     var server = Servers.mock
@@ -18,9 +19,11 @@ class PostMetadataCollectionViewController: UICollectionViewController, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Register cell nib
+        // Register cell nib and header nib
         
-        self.collectionView.register(UINib(nibName: String(describing: PostMetadataCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView.register(UINib(nibName: String(describing: PostMetadataCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier: cellReuseIdentifier)
+        self.collectionView.register(UINib(nibName: String(describing: HeaderCollectionReusableView.self), bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)
+
 
         // Do any additional setup after loading the view.
         title = "Blog Posts"
@@ -33,12 +36,15 @@ class PostMetadataCollectionViewController: UICollectionViewController, UICollec
         
         let groupByAuthorAction = UIAlertAction(title: "Author", style: .default) { [weak self] _ in
             self?.group(by: .author)
+            self?.collectionView.reloadData()
         }
         let groupByMonthAction = UIAlertAction(title: "Month", style: .default) { [weak self] _ in
             self?.group(by: .month)
+            self?.collectionView.reloadData()
         }
         let noGroupAction = UIAlertAction(title: "No Grouping", style: .default) { [weak self] _ in
             self?.group(by: .none)
+            self?.collectionView.reloadData()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
@@ -97,13 +103,30 @@ class PostMetadataCollectionViewController: UICollectionViewController, UICollec
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return dataSource.numberOfSections()
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
+                                                                            withReuseIdentifier: headerReuseIdentifier,
+                                                                            for: indexPath) as! HeaderCollectionReusableView
+            headerView.headerLabel.text = dataSource.titleForSection(indexPath.section)
+            return headerView
+        default:
+            assert(false, "Unexpected element kind")
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.bounds.size.width, height: 50)
+    }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataSource.numberOfPostsInSection(section)
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PostMetadataCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! PostMetadataCollectionViewCell
         
         let postMetadata = dataSource.postMetadata(at: indexPath)
         cell.configure(forPostMetaData: postMetadata)
@@ -144,9 +167,8 @@ class PostMetadataCollectionViewController: UICollectionViewController, UICollec
         return UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.size.width, height: 160)
+        return CGSize(width: collectionView.bounds.size.width, height: 160)
     }
-    
     
     
     // MARK: - Data methods

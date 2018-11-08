@@ -17,6 +17,8 @@
 		45862B352194166F00DA7E31 /* AllPostMetaDataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45862B342194166F00DA7E31 /* AllPostMetaDataRequest.swift */; };
 		45862B372194167600DA7E31 /* ImageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45862B362194167600DA7E31 /* ImageRequest.swift */; };
 		45862B392194210E00DA7E31 /* BlogPostRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45862B382194210E00DA7E31 /* BlogPostRequest.swift */; };
+		45862B3D2194C13E00DA7E31 /* HeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45862B3B2194C13E00DA7E31 /* HeaderCollectionReusableView.swift */; };
+		45862B3E2194C13E00DA7E31 /* HeaderCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45862B3C2194C13E00DA7E31 /* HeaderCollectionReusableView.xib */; };
 		8367F7D3215C2E5000C250AC /* PostMetadataDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8367F7D2215C2E5000C250AC /* PostMetadataDataSource.swift */; };
 		8367F7D4215C2E5F00C250AC /* PostMetadataDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8367F7D2215C2E5000C250AC /* PostMetadataDataSource.swift */; };
 		836E38D32139A918005B928C /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836E38D22139A918005B928C /* Server.swift */; };
@@ -65,6 +67,8 @@
 		45862B342194166F00DA7E31 /* AllPostMetaDataRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPostMetaDataRequest.swift; sourceTree = "<group>"; };
 		45862B362194167600DA7E31 /* ImageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRequest.swift; sourceTree = "<group>"; };
 		45862B382194210E00DA7E31 /* BlogPostRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogPostRequest.swift; sourceTree = "<group>"; };
+		45862B3B2194C13E00DA7E31 /* HeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionReusableView.swift; sourceTree = "<group>"; };
+		45862B3C2194C13E00DA7E31 /* HeaderCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderCollectionReusableView.xib; sourceTree = "<group>"; };
 		8367F7D2215C2E5000C250AC /* PostMetadataDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostMetadataDataSource.swift; sourceTree = "<group>"; };
 		836E38D22139A918005B928C /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		83B00AC621359CFF000C70F9 /* Blog Nerd Ranch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Blog Nerd Ranch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,6 +136,15 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		45862B3A2194C0EF00DA7E31 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				45862B3B2194C13E00DA7E31 /* HeaderCollectionReusableView.swift */,
+				45862B3C2194C13E00DA7E31 /* HeaderCollectionReusableView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		83B00ABD21359CFF000C70F9 = {
 			isa = PBXGroup;
 			children = (
@@ -155,6 +168,7 @@
 		83B00AC821359CFF000C70F9 /* Blog Nerd Ranch */ = {
 			isa = PBXGroup;
 			children = (
+				45862B3A2194C0EF00DA7E31 /* Views */,
 				45862B2D2193B80000DA7E31 /* Network */,
 				45862B2A2193B17900DA7E31 /* Utilities */,
 				83B00B0E21389CD6000C70F9 /* Cells */,
@@ -326,6 +340,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				83B00AD421359D00000C70F9 /* LaunchScreen.storyboard in Resources */,
+				45862B3E2194C13E00DA7E31 /* HeaderCollectionReusableView.xib in Resources */,
 				83B00AD121359D00000C70F9 /* Assets.xcassets in Resources */,
 				83B00ACF21359CFF000C70F9 /* Main.storyboard in Resources */,
 				45862B292193A39400DA7E31 /* PostMetadataCollectionViewCell.xib in Resources */,
@@ -363,6 +378,7 @@
 				45862B392194210E00DA7E31 /* BlogPostRequest.swift in Sources */,
 				45862B312194057500DA7E31 /* NetworkResult.swift in Sources */,
 				83C918E9213DDBD100FD6F83 /* DisplayOrdering.swift in Sources */,
+				45862B3D2194C13E00DA7E31 /* HeaderCollectionReusableView.swift in Sources */,
 				45862B372194167600DA7E31 /* ImageRequest.swift in Sources */,
 				8367F7D3215C2E5000C250AC /* PostMetadataDataSource.swift in Sources */,
 				83B00AFC21359FE1000C70F9 /* PostMetadataCollectionViewController.swift in Sources */,

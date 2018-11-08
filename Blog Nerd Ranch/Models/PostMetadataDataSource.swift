@@ -37,7 +37,20 @@ struct PostMetadataDataSource {
     
     private mutating func createGroups() {
         // TODO: Group and sort the posts according to the `ordering` value.
-        groups = [Group(name: nil, postMetadata: postMetadataList)]
+        switch ordering.grouping {
+        case .none:
+            groups = [Group(name: "No Grouping", postMetadata: postMetadataList)]
+        case .author:
+            // todo can this be more stylish?
+            let authorGroup = Dictionary(grouping: postMetadataList, by: { $0.author.name })
+            var authorGroupArray = [Group]()
+            authorGroup.forEach {
+                authorGroupArray.append(Group(name: $0.key, postMetadata: $0.value))
+            }
+            groups = authorGroupArray.sorted { $0.name ?? "" < $1.name ?? "" }
+        case .month:
+            break
+        }
     }
     
     // MARK: UICollectionViewDataSource convenience
