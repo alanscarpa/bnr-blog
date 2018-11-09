@@ -117,7 +117,7 @@ class PostMetadataCollectionViewController: UICollectionViewController, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.bounds.size.width, height: 50)
+        return dataSource.titleForSection(section) == nil ? .zero : CGSize(width: collectionView.bounds.size.width, height: 50)
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
