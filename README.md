@@ -32,7 +32,7 @@ show title, author, summary, and publish date. We recommend you build this view
 in a xib or storyboard.
 - [ x] Grouping & sorting are both broken. The menus come up, but the order of
 the summaries doesn't change when I make a selection.
-- [ ] Archibald's _massive_ blog post takes a long time to download from the server,
+- [ x] Archibald's _massive_ blog post takes a long time to download from the server,
 and it's slowing the whole app down. We should delay downloading that post
 unless we have to, and maybe add a loading state to improve the experience.
 - [ ] Our unit & UI tests are pretty bare-bones right now. We should add

@@ -20,6 +20,8 @@
 		45862B3D2194C13E00DA7E31 /* HeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45862B3B2194C13E00DA7E31 /* HeaderCollectionReusableView.swift */; };
 		45862B3E2194C13E00DA7E31 /* HeaderCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45862B3C2194C13E00DA7E31 /* HeaderCollectionReusableView.xib */; };
 		45862B4021950D9900DA7E31 /* ActivitySpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45862B3F21950D9900DA7E31 /* ActivitySpinnerView.swift */; };
+		45862B41219530F100DA7E31 /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45862B1E2193A00B00DA7E31 /* Author.swift */; };
+		45862B422195310700DA7E31 /* DateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45862B2B2193B1DD00DA7E31 /* DateHandler.swift */; };
 		8367F7D3215C2E5000C250AC /* PostMetadataDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8367F7D2215C2E5000C250AC /* PostMetadataDataSource.swift */; };
 		8367F7D4215C2E5F00C250AC /* PostMetadataDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8367F7D2215C2E5000C250AC /* PostMetadataDataSource.swift */; };
 		836E38D32139A918005B928C /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836E38D22139A918005B928C /* Server.swift */; };
@@ -397,11 +399,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45862B422195310700DA7E31 /* DateHandler.swift in Sources */,
 				836E38D42139A918005B928C /* Server.swift in Sources */,
 				83C918EF213E18E500FD6F83 /* PostMetadata.swift in Sources */,
 				83B00ADF21359D00000C70F9 /* PostMetadataDataSourceTests.swift in Sources */,
 				83C918ED213E173400FD6F83 /* Post.swift in Sources */,
 				83C918EE213E173700FD6F83 /* DisplayOrdering.swift in Sources */,
+				45862B41219530F100DA7E31 /* Author.swift in Sources */,
 				8367F7D4215C2E5F00C250AC /* PostMetadataDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
