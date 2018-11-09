@@ -36,15 +36,12 @@ class PostMetadataCollectionViewController: UICollectionViewController, UICollec
         
         let groupByAuthorAction = UIAlertAction(title: "Author", style: .default) { [weak self] _ in
             self?.group(by: .author)
-            self?.collectionView.reloadData()
         }
         let groupByMonthAction = UIAlertAction(title: "Month", style: .default) { [weak self] _ in
             self?.group(by: .month)
-            self?.collectionView.reloadData()
         }
         let noGroupAction = UIAlertAction(title: "No Grouping", style: .default) { [weak self] _ in
             self?.group(by: .none)
-            self?.collectionView.reloadData()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
@@ -92,10 +89,12 @@ class PostMetadataCollectionViewController: UICollectionViewController, UICollec
     
     func group(by grouping: Grouping) {
         dataSource.ordering.grouping = grouping
+        collectionView.reloadData()
     }
     
     func sort(_ sorting: Sorting) {
         dataSource.ordering.sorting = sorting
+        collectionView.reloadData()
     }
     
     // MARK: UICollectionViewDataSource

@@ -58,12 +58,38 @@ struct PostMetadataDataSource {
             })
             var monthGroupArray = [Group]()
             monthGroup.forEach {
+                // todo dupe code
                 let sortedPostMetadata = $0.value.sorted(by: { (pm1, pm2) -> Bool in
                     pm1.publishDate > pm2.publishDate
                 })
                 monthGroupArray.append(Group(name: $0.key, postMetadata: sortedPostMetadata))
             }
             groups = monthGroupArray.sorted { DateHandler.shared.date(fromMonthString: $0.name!) > DateHandler.shared.date(fromMonthString: $1.name!) }
+        }
+        
+        switch ordering.sorting {
+        case .alphabeticalByTitle(let ascending):
+            // todo dupe code
+            for (index, group) in groups.enumerated() {
+                let sorted = group.postMetadata.sorted(by: {
+                    ascending ? $0.title < $1.title : $0.title > $1.title
+                })
+                groups[index].postMetadata = sorted
+            }
+        case .alphabeticalByAuthor(let ascending):
+            for (index, group) in groups.enumerated() {
+                let sorted = group.postMetadata.sorted(by: {
+                    ascending ? $0.author.name < $1.author.name : $0.author.name > $1.author.name
+                })
+                groups[index].postMetadata = sorted
+            }
+        case .byPublishDate(let recentFirst):
+            for (index, group) in groups.enumerated() {
+                let sorted = group.postMetadata.sorted(by: {
+                    recentFirst ? $0.publishDate > $1.publishDate : $0.publishDate < $1.publishDate
+                })
+                groups[index].postMetadata = sorted
+            }
         }
     }
     
