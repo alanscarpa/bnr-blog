@@ -179,7 +179,7 @@ class PostMetadataCollectionViewController: UICollectionViewController, UICollec
         downloadTask = AllPostMetaDataRequest().load(server.allPostMetadataUrl) { [weak self] result in
             switch result {
             case .success(let metadataList):
-                self?.dataSource.postMetadataList = metadataList
+                self?.dataSource.set(postMetadataList: metadataList)
             case .failure(let error):
                 self?.displayError(error)
             }

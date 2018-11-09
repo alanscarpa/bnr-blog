@@ -21,7 +21,7 @@ struct PostMetadataDataSource {
             createGroups()
         }
     }
-    var postMetadataList : [PostMetadata] {
+    private var postMetadataList : [PostMetadata] {
         didSet {
             createGroups()
         }
@@ -35,11 +35,14 @@ struct PostMetadataDataSource {
         createGroups()
     }
     
+    mutating func set(postMetadataList: [PostMetadata]) {
+        self.postMetadataList = postMetadataList
+    }
+    
     private mutating func createGroups() {
         switch ordering.grouping {
         case .none:
-            let sortedPostMetadata = postMetadataList.sorted(by: { $0.publishDate > $1.publishDate })
-            groups = [Group(name: nil, postMetadata: sortedPostMetadata)]
+            groups = [Group(name: nil, postMetadata: postMetadataList)]
         case .author:
             // todo can this be more stylish?
             let authorGroup = Dictionary(grouping: postMetadataList, by: { $0.author.name })
