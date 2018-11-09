@@ -132,7 +132,7 @@ class PostMetadataCollectionViewController: UICollectionViewController, UICollec
     
         return cell
     }
-
+    
     // MARK: UICollectionViewDelegate
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if downloadTask?.progress.isCancellable ?? false {
@@ -140,8 +140,9 @@ class PostMetadataCollectionViewController: UICollectionViewController, UICollec
         }
         let postMetadata = dataSource.postMetadata(at: indexPath)
         let url = server.postUrlFor(id: postMetadata.postId)
-        // todo: show spinner
+        ActivitySpinnerView.shared.showSpinner()
         downloadTask = BlogPostRequest().load(url) { [weak self] result in
+            ActivitySpinnerView.shared.hideSpinner()
             switch result {
             case .success(let post):
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)

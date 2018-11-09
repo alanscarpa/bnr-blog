@@ -30,7 +30,7 @@ it:
 - [x ] Our collection view just shows the blog title for each post. It should
 show title, author, summary, and publish date. We recommend you build this view
 in a xib or storyboard.
-- [ ] Grouping & sorting are both broken. The menus come up, but the order of
+- [ x] Grouping & sorting are both broken. The menus come up, but the order of
 the summaries doesn't change when I make a selection.
 - [ ] Archibald's _massive_ blog post takes a long time to download from the server,
 and it's slowing the whole app down. We should delay downloading that post
