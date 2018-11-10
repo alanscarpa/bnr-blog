@@ -21,6 +21,7 @@ struct PostMetadataDataSource {
             createGroups()
         }
     }
+    
     private var postMetadataList : [PostMetadata] {
         didSet {
             createGroups()
