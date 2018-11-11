@@ -74,8 +74,7 @@ struct PostMetadataDataSource {
     
     private mutating func sortGroupsMetadata(_ sorter: (PostMetadata, PostMetadata) -> Bool) {
         for (index, group) in groups.enumerated() {
-            let sortedMetadata = group.postMetadata.sorted(by: sorter)
-            groups[index].postMetadata = sortedMetadata
+            groups[index].postMetadata = group.postMetadata.sorted(by: sorter)
         }
     }
     
