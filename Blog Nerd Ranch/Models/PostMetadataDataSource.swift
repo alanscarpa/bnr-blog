@@ -67,11 +67,7 @@ struct PostMetadataDataSource {
     // MARK: Grouping
     
     private func groups(fromGrouping grouping: Dictionary<String, [PostMetadata]>, sortedBy sorter: (PostMetadataDataSource.Group, PostMetadataDataSource.Group) -> Bool) -> [Group] {
-        var groupArray = [Group]()
-        grouping.forEach {
-            groupArray.append(Group(name: $0.key, postMetadata: $0.value))
-        }
-        return groupArray.sorted(by: sorter)
+        return grouping.map({ Group(name: $0.key, postMetadata: $0.value) }).sorted(by: sorter)
     }
     
     // MARK: Sorting
