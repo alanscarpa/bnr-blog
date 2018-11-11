@@ -149,9 +149,7 @@ class PostMetadataCollectionViewController: UICollectionViewController, UICollec
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let postController = storyboard.instantiateViewController(withIdentifier: "PostViewController") as! PostViewController
                 postController.post = post
-                DispatchQueue.main.async {
-                    self?.navigationController?.pushViewController(postController, animated: true)
-                }
+                self?.navigationController?.pushViewController(postController, animated: true)
             case .failure(let error):
                 self?.displayError(error)
             }
@@ -184,9 +182,7 @@ class PostMetadataCollectionViewController: UICollectionViewController, UICollec
             case .failure(let error):
                 self?.displayError(error)
             }
-            DispatchQueue.main.async {
-                self?.collectionView?.reloadData()
-            }
+            self?.collectionView?.reloadData()
         }
     }
     

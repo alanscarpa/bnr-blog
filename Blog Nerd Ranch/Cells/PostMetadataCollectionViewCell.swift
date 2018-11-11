@@ -60,9 +60,7 @@ class PostMetadataCollectionViewCell: UICollectionViewCell {
         imageDataTask = ImageRequest().load(server.imageUrlFor(path: postMetaData.author.imagePath)) { [weak self] result in
             switch result {
             case .success(let image):
-                DispatchQueue.main.async {
-                    self?.authorImageView.image = image
-                }
+                self?.authorImageView.image = image
             case .failure(let error):
                 print(error.localizedDescription)
             }
