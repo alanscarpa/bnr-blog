@@ -27,7 +27,7 @@ class Blog_Nerd_RanchUITests: XCTestCase {
         let blogPostsNavigationBar = app.navigationBars["Blog Posts"]
         blogPostsNavigationBar.buttons["Group By"].tap()
         let sheetsQuery = app.sheets
-        
+        print(app.sheets["Grouping Options"].exists)
         XCTAssert(sheetsQuery.staticTexts["Group the posts by..."].exists)
     }
     

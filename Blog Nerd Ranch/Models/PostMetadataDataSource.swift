@@ -49,9 +49,7 @@ struct PostMetadataDataSource {
             let authorGroup = Dictionary(grouping: postMetadataList, by: { $0.author.name })
             var authorGroupArray = [Group]()
             authorGroup.forEach {
-                let sortedPostMetadata = $0.value.sorted(by: { (pm1, pm2) -> Bool in
-                    pm1.publishDate > pm2.publishDate
-                })
+                let sortedPostMetadata = $0.value.sorted(by: { $0.publishDate > $1.publishDate })
                 authorGroupArray.append(Group(name: $0.key, postMetadata: sortedPostMetadata))
             }
             groups = authorGroupArray.sorted { $0.name ?? "" < $1.name ?? "" }
@@ -63,12 +61,10 @@ struct PostMetadataDataSource {
             var monthGroupArray = [Group]()
             monthGroup.forEach {
                 // todo dupe code
-                let sortedPostMetadata = $0.value.sorted(by: { (pm1, pm2) -> Bool in
-                    pm1.publishDate > pm2.publishDate
-                })
+                let sortedPostMetadata = $0.value.sorted(by: { $0.publishDate > $1.publishDate })
                 monthGroupArray.append(Group(name: $0.key, postMetadata: sortedPostMetadata))
             }
-            groups = monthGroupArray.sorted { DateHandler.shared.date(fromMonthString: $0.name!) > DateHandler.shared.date(fromMonthString: $1.name!) }
+            groups = monthGroupArray.sorted { DateHandler.shared.date(fromMonthString: $0.name ?? "") > DateHandler.shared.date(fromMonthString: $1.name ?? "") }
         }
         
         switch ordering.sorting {

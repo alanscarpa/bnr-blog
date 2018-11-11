@@ -57,7 +57,6 @@ class PostMetadataCollectionViewCell: UICollectionViewCell {
         dateLabel.text = DateHandler.shared.shortStyle(fromDate: postMetaData.publishDate)
         summaryLabel.text = postMetaData.summary
         
-        // todo cache image
         imageDataTask = ImageRequest().load(server.imageUrlFor(path: postMetaData.author.imagePath)) { [weak self] result in
             switch result {
             case .success(let image):

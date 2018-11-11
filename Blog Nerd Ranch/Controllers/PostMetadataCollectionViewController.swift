@@ -33,7 +33,6 @@ class PostMetadataCollectionViewController: UICollectionViewController, UICollec
     // MARK: Actions
     @IBAction func groupByTapped(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: nil, message: "Group the posts by...", preferredStyle: .actionSheet)
-        alertController.isAccessibilityElement = true
         alertController.accessibilityLabel = "Grouping Options"
         let groupByAuthorAction = UIAlertAction(title: "Author", style: .default) { [weak self] _ in
             self?.group(by: .author)
