@@ -39,57 +39,49 @@ struct PostMetadataDataSource {
     mutating func set(postMetadataList: [PostMetadata]) {
         self.postMetadataList = postMetadataList
     }
-    
+
     private mutating func createGroups() {
         switch ordering.grouping {
         case .none:
             groups = [Group(name: nil, postMetadata: postMetadataList)]
         case .author:
-            // todo can this be more stylish?
-            let authorGroup = Dictionary(grouping: postMetadataList, by: { $0.author.name })
-            var authorGroupArray = [Group]()
-            authorGroup.forEach {
-                let sortedPostMetadata = $0.value.sorted(by: { $0.publishDate > $1.publishDate })
-                authorGroupArray.append(Group(name: $0.key, postMetadata: sortedPostMetadata))
-            }
-            groups = authorGroupArray.sorted { $0.name ?? "" < $1.name ?? "" }
+            let authorGrouping = Dictionary(grouping: postMetadataList, by: { $0.author.name })
+            groups = groups(fromGrouping: authorGrouping, sortedBy: { $0.name ?? "" < $1.name ?? "" })
         case .month:
-            // todo can this be more stylish?
-            let monthGroup = Dictionary(grouping: postMetadataList, by: {
+            let monthGrouping = Dictionary(grouping: postMetadataList, by: {
                 DateHandler.shared.monthString(fromDate: $0.publishDate)
             })
-            var monthGroupArray = [Group]()
-            monthGroup.forEach {
-                // todo dupe code
-                let sortedPostMetadata = $0.value.sorted(by: { $0.publishDate > $1.publishDate })
-                monthGroupArray.append(Group(name: $0.key, postMetadata: sortedPostMetadata))
-            }
-            groups = monthGroupArray.sorted { DateHandler.shared.date(fromMonthString: $0.name ?? "") > DateHandler.shared.date(fromMonthString: $1.name ?? "") }
+            groups = groups(fromGrouping: monthGrouping, sortedBy: { DateHandler.shared.date(fromMonthString: $0.name ?? "") > DateHandler.shared.date(fromMonthString: $1.name ?? "") })
         }
         
         switch ordering.sorting {
         case .alphabeticalByTitle(let ascending):
-            // todo dupe code
-            for (index, group) in groups.enumerated() {
-                let sorted = group.postMetadata.sorted(by: {
-                    ascending ? $0.title < $1.title : $0.title > $1.title
-                })
-                groups[index].postMetadata = sorted
-            }
+            sortGroupsMetadata { ascending ? $0.title < $1.title : $0.title > $1.title }
         case .alphabeticalByAuthor(let ascending):
-            for (index, group) in groups.enumerated() {
-                let sorted = group.postMetadata.sorted(by: {
-                    ascending ? $0.author.name < $1.author.name : $0.author.name > $1.author.name
-                })
-                groups[index].postMetadata = sorted
-            }
+            sortGroupsMetadata { ascending ? $0.author.name < $1.author.name : $0.author.name > $1.author.name }
         case .byPublishDate(let recentFirst):
-            for (index, group) in groups.enumerated() {
-                let sorted = group.postMetadata.sorted(by: {
-                    recentFirst ? $0.publishDate > $1.publishDate : $0.publishDate < $1.publishDate
-                })
-                groups[index].postMetadata = sorted
-            }
+            sortGroupsMetadata { recentFirst ? $0.publishDate > $1.publishDate : $0.publishDate < $1.publishDate }
+        }
+    }
+    
+    // MARK: Grouping
+    
+    private func groups(fromGrouping grouping: Dictionary<String, [PostMetadata]>, sortedBy sorter: (PostMetadataDataSource.Group, PostMetadataDataSource.Group) -> Bool) -> [Group] {
+        var groupArray = [Group]()
+        grouping.forEach {
+            // By default, we sort the metadata within the group by newest first because users are accustomed to this type of behavior.
+            let sortedPostMetadata = $0.value.sorted(by: { $0.publishDate > $1.publishDate })
+            groupArray.append(Group(name: $0.key, postMetadata: sortedPostMetadata))
+        }
+        return groupArray.sorted(by: sorter)
+    }
+    
+    // MARK: Sorting
+    
+    private mutating func sortGroupsMetadata(_ sorter: (PostMetadata, PostMetadata) -> Bool) {
+        for (index, group) in groups.enumerated() {
+            let sortedMetadata = group.postMetadata.sorted(by: sorter)
+            groups[index].postMetadata = sortedMetadata
         }
     }
     
@@ -110,9 +102,5 @@ struct PostMetadataDataSource {
     func postMetadata(at indexPath: IndexPath) -> PostMetadata {
         return groups[indexPath.section].postMetadata[indexPath.row]
     }
- 
-    // MARK: Grouping
-        
-    // MARK: Sorting
     
 }
