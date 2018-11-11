@@ -8,29 +8,30 @@
 
 import Foundation
 
-struct AllPostMetaDataRequest: NetworkRequest {
+struct AllPostMetaDataRequest: APIRequest, NetworkRequest {
     func load(_ url: URL, completion: @escaping (NetworkResult<[PostMetadata]>) -> Void) -> URLSessionDataTask {
         let task = dataTask(with: url) { result in
             switch result {
             case .success(let data):
-                let metadataList : [PostMetadata]?
-                let decoder = JSONDecoder();
-                decoder.dateDecodingStrategy = .iso8601
-                do {
-                    metadataList = try decoder.decode(Array.self, from: data)
-                } catch {
-                    completion(.failure(error))
-                    return
-                }
-                if let list = metadataList {
-                    completion(.success(list))
-                } else {
-                    completion(.failure(BNRError.nilObject))
-                }
+                completion(self.decode(data))
             case .failure(let error):
                 completion(.failure(error))
             }
         }
         return task
+    }
+    
+    func decode(_ data: Data) -> NetworkResult<[PostMetadata]> {
+        let metadataList : [PostMetadata]?
+        do {
+            metadataList = try self.decoder().decode(Array.self, from: data)
+        } catch {
+            return .failure(error)
+        }
+        if let metadataList = metadataList {
+            return .success(metadataList)
+        } else {
+            return .failure(BNRError.nilObject)
+        }
     }
 }

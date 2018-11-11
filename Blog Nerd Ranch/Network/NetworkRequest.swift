@@ -17,15 +17,15 @@ extension NetworkRequest {
     func dataTask(with url: URL, completion: @escaping (NetworkResult<Data>) -> Void) -> URLSessionDataTask {
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             DispatchQueue.main.async {
-                guard error == nil else {
-                    completion(.failure(error!))
+                if let error = error {
+                    completion(.failure(error))
                     return
                 }
-                guard let data = data else {
+                if let data = data {
+                    completion(.success(data))
+                } else {
                     completion(.failure(BNRError.missingData))
-                    return
                 }
-                completion(.success(data))
             }
         }
         task.resume()

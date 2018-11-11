@@ -8,29 +8,30 @@
 
 import Foundation
 
-struct BlogPostRequest: NetworkRequest {
+struct BlogPostRequest: APIRequest, NetworkRequest {
     func load(_ url: URL, completion: @escaping (NetworkResult<Post>) -> Void) -> URLSessionDataTask {
         let task = dataTask(with: url) { result in
             switch result {
             case .success(let data):
-                let post : Post?
-                let decoder = JSONDecoder();
-                decoder.dateDecodingStrategy = .iso8601
-                do {
-                    post = try decoder.decode(Post.self, from: data)
-                } catch {
-                    completion(.failure(error))
-                    return
-                }
-                if let post = post {
-                    completion(.success(post))
-                } else {
-                    completion(.failure(BNRError.nilObject))
-                }
+                completion(self.decode(data))
             case .failure(let error):
                 completion(.failure(error))
             }
         }
         return task
+    }
+    
+    func decode(_ data: Data) -> NetworkResult<Post> {
+        let post : Post?
+        do {
+            post = try decoder().decode(Post.self, from: data)
+        } catch {
+            return .failure(error)
+        }
+        if let post = post {
+            return .success(post)
+        } else {
+            return .failure(BNRError.nilObject)
+        }
     }
 }

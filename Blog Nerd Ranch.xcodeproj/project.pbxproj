@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		451F05992198EDD80070ECD9 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451F05982198EDD80070ECD9 /* APIRequest.swift */; };
 		45862B1F2193A00B00DA7E31 /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45862B1E2193A00B00DA7E31 /* Author.swift */; };
 		45862B282193A39400DA7E31 /* PostMetadataCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45862B262193A39400DA7E31 /* PostMetadataCollectionViewCell.swift */; };
 		45862B292193A39400DA7E31 /* PostMetadataCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45862B272193A39400DA7E31 /* PostMetadataCollectionViewCell.xib */; };
@@ -60,6 +61,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		451F05982198EDD80070ECD9 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		45862B1E2193A00B00DA7E31 /* Author.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
 		45862B262193A39400DA7E31 /* PostMetadataCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostMetadataCollectionViewCell.swift; sourceTree = "<group>"; };
 		45862B272193A39400DA7E31 /* PostMetadataCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostMetadataCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 			children = (
 				45862B2E2193BD5000DA7E31 /* NetworkRequest.swift */,
 				45862B342194166F00DA7E31 /* AllPostMetaDataRequest.swift */,
+				451F05982198EDD80070ECD9 /* APIRequest.swift */,
 				45862B382194210E00DA7E31 /* BlogPostRequest.swift */,
 				45862B362194167600DA7E31 /* ImageRequest.swift */,
 				45862B302194057500DA7E31 /* NetworkResult.swift */,
@@ -391,6 +394,7 @@
 				83B00B03213621EE000C70F9 /* Post.swift in Sources */,
 				45862B2F2193BD5000DA7E31 /* NetworkRequest.swift in Sources */,
 				45862B352194166F00DA7E31 /* AllPostMetaDataRequest.swift in Sources */,
+				451F05992198EDD80070ECD9 /* APIRequest.swift in Sources */,
 				45862B282193A39400DA7E31 /* PostMetadataCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
