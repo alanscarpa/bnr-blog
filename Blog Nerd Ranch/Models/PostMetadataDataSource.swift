@@ -69,9 +69,7 @@ struct PostMetadataDataSource {
     private func groups(fromGrouping grouping: Dictionary<String, [PostMetadata]>, sortedBy sorter: (PostMetadataDataSource.Group, PostMetadataDataSource.Group) -> Bool) -> [Group] {
         var groupArray = [Group]()
         grouping.forEach {
-            // By default, we sort the metadata within the group by newest first because users are accustomed to this type of behavior.
-            let sortedPostMetadata = $0.value.sorted(by: { $0.publishDate > $1.publishDate })
-            groupArray.append(Group(name: $0.key, postMetadata: sortedPostMetadata))
+            groupArray.append(Group(name: $0.key, postMetadata: $0.value))
         }
         return groupArray.sorted(by: sorter)
     }
