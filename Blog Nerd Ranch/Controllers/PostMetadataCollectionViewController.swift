@@ -33,7 +33,7 @@ class PostMetadataCollectionViewController: UICollectionViewController, UICollec
     // MARK: Actions
     @IBAction func groupByTapped(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: nil, message: "Group the posts by...", preferredStyle: .actionSheet)
-        alertController.accessibilityLabel = "Grouping Options"
+        alertController.view.accessibilityLabel = "Grouping Options"
         let groupByAuthorAction = UIAlertAction(title: "Author", style: .default) { [weak self] _ in
             self?.group(by: .author)
         }
@@ -55,7 +55,7 @@ class PostMetadataCollectionViewController: UICollectionViewController, UICollec
     
     @IBAction func sortTapped(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: nil, message: "Sort the posts by...", preferredStyle: .actionSheet)
-        alertController.accessibilityLabel = "Sorting Options"
+        alertController.view.accessibilityLabel = "Sorting Options"
         
         let sortByAuthorAscendingAction = UIAlertAction(title: "Author from A to Z", style: .default) { [weak self] _ in
             self?.sort(.alphabeticalByAuthor(ascending: true))

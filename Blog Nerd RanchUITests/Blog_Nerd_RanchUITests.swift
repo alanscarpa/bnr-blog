@@ -27,8 +27,8 @@ class Blog_Nerd_RanchUITests: XCTestCase {
         let blogPostsNavigationBar = app.navigationBars["Blog Posts"]
         blogPostsNavigationBar.buttons["Group By"].tap()
         let sheetsQuery = app.sheets
-        print(app.sheets["Grouping Options"].exists)
-        XCTAssert(sheetsQuery.staticTexts["Group the posts by..."].exists)
+        
+        XCTAssert(sheetsQuery["Grouping Options"].exists)
     }
     
     func testThatTappingSortButtonPresentsAlertController() {
@@ -36,7 +36,7 @@ class Blog_Nerd_RanchUITests: XCTestCase {
         blogPostsNavigationBar.buttons["Sort"].tap()
         let sheetsQuery = app.sheets
         
-        XCTAssert(sheetsQuery.staticTexts["Sort the posts by..."].exists)
+        XCTAssert(sheetsQuery["Sorting Options"].exists)
     }
     
     func testThatTappingOnAMetadataCellShowsThatPost() {
