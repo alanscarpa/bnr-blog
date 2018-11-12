@@ -134,8 +134,8 @@
 			isa = PBXGroup;
 			children = (
 				45862B2E2193BD5000DA7E31 /* NetworkRequest.swift */,
-				45862B342194166F00DA7E31 /* AllPostMetaDataRequest.swift */,
 				451F05982198EDD80070ECD9 /* APIRequest.swift */,
+				45862B342194166F00DA7E31 /* AllPostMetaDataRequest.swift */,
 				45862B382194210E00DA7E31 /* BlogPostRequest.swift */,
 				45862B362194167600DA7E31 /* ImageRequest.swift */,
 				45862B302194057500DA7E31 /* NetworkResult.swift */,

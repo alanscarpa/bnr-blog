@@ -8,12 +8,24 @@
 
 import Foundation
 
-protocol APIRequest {
+protocol APIRequest: NetworkRequest {
     associatedtype Model: Codable
     func decode(_ data: Data) -> NetworkResult<Model>
 }
 
 extension APIRequest {
+    func load(_ url: URL, completion: @escaping (NetworkResult<Model>) -> Void) -> URLSessionDataTask {
+        let task = dataTask(with: url) { result in
+            switch result {
+            case .success(let data):
+                completion(self.decode(data))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+        return task
+    }
+    
     func decoder() -> JSONDecoder {
         let decoder = JSONDecoder();
         decoder.dateDecodingStrategy = .iso8601
